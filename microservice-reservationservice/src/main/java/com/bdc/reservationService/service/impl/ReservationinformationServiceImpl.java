@@ -217,7 +217,7 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
         if(user != null){
             QueryWrapper<Reservationinformation> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(Reservationinformation::getUserId, user.getId());
-            List<Reservationinformation> list = this.reservationinformationMapper.selectList(queryWrapper);
+            List<Reservationinformation> list = this.baseMapper.selectList(queryWrapper);
             data.put("list", list);
             return data;
         }
@@ -245,12 +245,14 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
             String [] timeList1 = time1.split("-");
             String [] time_reList = time_re.split(":");
             String [] time_reList1 = time2.split(":");
-            if(Integer.getInteger(timeList1[0]) > Integer.getInteger(timeList[0])){
+            if(Integer.parseInt(timeList1[0]) > Integer.parseInt(timeList[0])){
                 return null;
             }
-            else if(Integer.getInteger(timeList1[0]) < Integer.getInteger(timeList[0])){
-                reservationinformation.setaState(0);
-                int i = this.baseMapper.update(reservationinformation, null);
+            else if(Integer.parseInt(timeList1[0]) < Integer.parseInt(timeList[0])){
+                UpdateWrapper<Reservationinformation> updateWrapper = new UpdateWrapper<>();
+                updateWrapper.lambda().eq(Reservationinformation::getId, id);
+                updateWrapper.lambda().set(Reservationinformation::getaState, 0);
+                int i = this.baseMapper.update(null, updateWrapper);
                 // 查找所对应的号球
                 QueryWrapper<Numberball> queryWrapper = new QueryWrapper<>();
                 queryWrapper.lambda().eq(Numberball::getTime, reservationinformation.getTimeRe());
@@ -265,12 +267,14 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                 return data;
             }
             else {
-                if(Integer.getInteger(timeList1[1]) > Integer.getInteger(timeList[1])){
+                if(Integer.parseInt(timeList1[1]) > Integer.parseInt(timeList[1])){
                     return null;
                 }
-                else if(Integer.getInteger(timeList1[1]) < Integer.getInteger(timeList[1])){
-                    reservationinformation.setaState(0);
-                    int i = this.baseMapper.update(reservationinformation, null);
+                else if(Integer.parseInt(timeList1[1]) < Integer.parseInt(timeList[1])){
+                    UpdateWrapper<Reservationinformation> updateWrapper = new UpdateWrapper<>();
+                    updateWrapper.lambda().eq(Reservationinformation::getId, id);
+                    updateWrapper.lambda().set(Reservationinformation::getaState, 0);
+                    int i = this.baseMapper.update(null, updateWrapper);
                     // 查找所对应的号球
                     QueryWrapper<Numberball> queryWrapper = new QueryWrapper<>();
                     queryWrapper.lambda().eq(Numberball::getTime, reservationinformation.getTimeRe());
@@ -278,19 +282,23 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                     queryWrapper.lambda().eq(Numberball::getCenterId, reservationinformation.getCenterId());
                     Numberball numberball = this.numberballMapper.selectOne(queryWrapper);
                     // 号球数量+1
-                    numberball.setNumber(numberball.getNumber() + 1);
-                    int z = this.numberballMapper.update(numberball, null);
+                    UpdateWrapper<Numberball> updateWrapper1 = new UpdateWrapper<>();
+                    updateWrapper1.lambda().eq(Numberball::getId, numberball.getId());
+                    updateWrapper1.lambda().set(Numberball::getNumber, numberball.getNumber()+1);
+                    int z = this.numberballMapper.update(null, updateWrapper1);
 
                     data.put("success", i);
                     return data;
                 }
                 else {
-                    if(Integer.getInteger(timeList1[2]) > Integer.getInteger(timeList[2])){
+                    if(Integer.parseInt(timeList1[2]) > Integer.parseInt(timeList[2])){
                         return null;
                     }
-                    else if(Integer.getInteger(timeList1[2]) < Integer.getInteger(timeList[2])){
-                        reservationinformation.setaState(0);
-                        int i = this.baseMapper.update(reservationinformation, null);
+                    else if(Integer.parseInt(timeList1[2]) < Integer.parseInt(timeList[2])){
+                        UpdateWrapper<Reservationinformation> updateWrapper = new UpdateWrapper<>();
+                        updateWrapper.lambda().eq(Reservationinformation::getId, id);
+                        updateWrapper.lambda().set(Reservationinformation::getaState, 0);
+                        int i = this.baseMapper.update(null, updateWrapper);
                         // 查找所对应的号球
                         QueryWrapper<Numberball> queryWrapper = new QueryWrapper<>();
                         queryWrapper.lambda().eq(Numberball::getTime, reservationinformation.getTimeRe());
@@ -298,20 +306,24 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                         queryWrapper.lambda().eq(Numberball::getCenterId, reservationinformation.getCenterId());
                         Numberball numberball = this.numberballMapper.selectOne(queryWrapper);
                         // 号球数量+1
-                        numberball.setNumber(numberball.getNumber() + 1);
-                        int z = this.numberballMapper.update(numberball, null);
+                        UpdateWrapper<Numberball> updateWrapper1 = new UpdateWrapper<>();
+                        updateWrapper1.lambda().eq(Numberball::getId, numberball.getId());
+                        updateWrapper1.lambda().set(Numberball::getNumber, numberball.getNumber()+1);
+                        int z = this.numberballMapper.update(null, updateWrapper1);
 
                         data.put("success", i);
                         return data;
                     }
                     else {
-                        if(Integer.getInteger(time_reList1[0]) >= Integer.getInteger(time_reList[0])){
+                        if(Integer.parseInt(time_reList1[0]) >= Integer.parseInt(time_reList[0])){
                             return null;
                         }
                         else {
                             if(Integer.getInteger(time_reList[0])-Integer.getInteger(time_reList1[0]) > 2){
-                                reservationinformation.setaState(0);
-                                int i = this.baseMapper.update(reservationinformation, null);
+                                UpdateWrapper<Reservationinformation> updateWrapper = new UpdateWrapper<>();
+                                updateWrapper.lambda().eq(Reservationinformation::getId, id);
+                                updateWrapper.lambda().set(Reservationinformation::getaState, 0);
+                                int i = this.baseMapper.update(null, updateWrapper);
                                 // 查找所对应的号球
                                 QueryWrapper<Numberball> queryWrapper = new QueryWrapper<>();
                                 queryWrapper.lambda().eq(Numberball::getTime, reservationinformation.getTimeRe());
@@ -319,16 +331,20 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                                 queryWrapper.lambda().eq(Numberball::getCenterId, reservationinformation.getCenterId());
                                 Numberball numberball = this.numberballMapper.selectOne(queryWrapper);
                                 // 号球数量+1
-                                numberball.setNumber(numberball.getNumber() + 1);
-                                int z = this.numberballMapper.update(numberball, null);
+                                UpdateWrapper<Numberball> updateWrapper1 = new UpdateWrapper<>();
+                                updateWrapper1.lambda().eq(Numberball::getId, numberball.getId());
+                                updateWrapper1.lambda().set(Numberball::getNumber, numberball.getNumber()+1);
+                                int z = this.numberballMapper.update(null, updateWrapper1);
 
                                 data.put("success", i);
                                 return data;
                             }
-                            else if(Integer.getInteger(time_reList[0])-Integer.getInteger(time_reList1[0]) == 2){
-                                if(Integer.getInteger(time_reList1[1]) <= Integer.getInteger(time_reList[1])){
-                                    reservationinformation.setaState(0);
-                                    int i = this.baseMapper.update(reservationinformation, null);
+                            else if(Integer.parseInt(time_reList[0])-Integer.parseInt(time_reList1[0]) == 2){
+                                if(Integer.parseInt(time_reList1[1]) <= Integer.parseInt(time_reList[1])){
+                                    UpdateWrapper<Reservationinformation> updateWrapper = new UpdateWrapper<>();
+                                    updateWrapper.lambda().eq(Reservationinformation::getId, id);
+                                    updateWrapper.lambda().set(Reservationinformation::getaState, 0);
+                                    int i = this.baseMapper.update(null, updateWrapper);
                                     // 查找所对应的号球
                                     QueryWrapper<Numberball> queryWrapper = new QueryWrapper<>();
                                     queryWrapper.lambda().eq(Numberball::getTime, reservationinformation.getTimeRe());
@@ -336,8 +352,10 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                                     queryWrapper.lambda().eq(Numberball::getCenterId, reservationinformation.getCenterId());
                                     Numberball numberball = this.numberballMapper.selectOne(queryWrapper);
                                     // 号球数量+1
-                                    numberball.setNumber(numberball.getNumber() + 1);
-                                    int z = this.numberballMapper.update(numberball, null);
+                                    UpdateWrapper<Numberball> updateWrapper1 = new UpdateWrapper<>();
+                                    updateWrapper1.lambda().eq(Numberball::getId, numberball.getId());
+                                    updateWrapper1.lambda().set(Numberball::getNumber, numberball.getNumber()+1);
+                                    int z = this.numberballMapper.update(null, updateWrapper1);
 
                                     data.put("success", i);
                                     return data;
@@ -368,6 +386,29 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
             // 根据用户id从redis查询该用户是否已存在惩罚名单中，若存在则不再添加，不存在则查询是否需要进行惩罚
             User punishUser = (User) RedisUtils.getValue("punishUser:" + user.getId());
             if(punishUser == null){
+
+                // 查询失约次数是否达到了3次
+                QueryWrapper<Reservationinformation> queryWrapper2 = new QueryWrapper<>();
+                queryWrapper2.lambda().eq(Reservationinformation::getUserId, user.getId());
+                queryWrapper2.lambda().eq(Reservationinformation::getpState, 2);
+                List<Reservationinformation> list2 = this.baseMapper.selectList(queryWrapper2);
+                if(list2!=null && list2.size()>=3){
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分ss秒");
+                    Map<String, String> map = new HashMap<>();
+                    map.put("ExpireTime", formatter.format(new Date(System.currentTimeMillis()+ 1000L * 60 * 60 * 24 * 90)));
+                    map.put("LoginTime", formatter.format(new Date(System.currentTimeMillis())));
+                    user.setTime(map);
+                    RedisUtils.saveValue("punishUser:" + user.getId(), user, 90, TimeUnit.DAYS);
+                    data.put("mages", "该用户失约次数达到了3次");
+                    for(Reservationinformation reservationinformation : list2){
+                        UpdateWrapper<Reservationinformation> updateWrapper = new UpdateWrapper<>();
+                        updateWrapper.lambda().eq(Reservationinformation::getId, reservationinformation.getId());
+                        updateWrapper.lambda().set(Reservationinformation::getpState, 3);
+                        this.baseMapper.update(null, updateWrapper);
+                    }
+                    return data;
+                }
+
                 // 查询当月取消次数是否达到了3次
                 Date now = new Date();
                 SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-");
@@ -378,7 +419,7 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                 queryWrapper.lambda().likeRight(Reservationinformation::getTimeNow, time);
                 queryWrapper.lambda().eq(Reservationinformation::getUserId, user.getId());
                 queryWrapper.lambda().eq(Reservationinformation::getaState, 0);
-                List<Reservationinformation> list = this.reservationinformationMapper.selectList(queryWrapper);
+                List<Reservationinformation> list = this.baseMapper.selectList(queryWrapper);
                 if(list != null && list.size() >= 3){
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分ss秒");
                     Map<String, String> map = new HashMap<>();
@@ -389,13 +430,13 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                     data.put("mages", "该用户当月取消预约次数达到了3次");
                     return data;
                 }
-                else if (list != null){
+                else{
                     // 查询当天取消次数是否达到了两次
                     QueryWrapper<Reservationinformation> queryWrapper1 = new QueryWrapper<>();
                     queryWrapper1.lambda().likeRight(Reservationinformation::getTimeNow, time1);
                     queryWrapper1.lambda().eq(Reservationinformation::getUserId, user.getId());
                     queryWrapper1.lambda().eq(Reservationinformation::getaState, 0);
-                    List<Reservationinformation> list1 = this.reservationinformationMapper.selectList(queryWrapper1);
+                    List<Reservationinformation> list1 = this.baseMapper.selectList(queryWrapper1);
                     if(list1 != null && list1.size()>=2){
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分ss秒");
                         Map<String, String> map = new HashMap<>();
@@ -407,27 +448,6 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
                         return data;
                     }
                 }
-                else {
-                    // 查询失约次数是否达到了3次
-                    QueryWrapper<Reservationinformation> queryWrapper2 = new QueryWrapper<>();
-                    queryWrapper2.lambda().eq(Reservationinformation::getUserId, user.getId());
-                    queryWrapper2.lambda().eq(Reservationinformation::getpState, 2);
-                    List<Reservationinformation> list1 = this.reservationinformationMapper.selectList(queryWrapper2);
-                    if(list1!=null && list1.size()>=3){
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分ss秒");
-                        Map<String, String> map = new HashMap<>();
-                        map.put("ExpireTime", formatter.format(new Date(System.currentTimeMillis()+ 1000L * 60 * 60 * 24 * 90)));
-                        map.put("LoginTime", formatter.format(new Date(System.currentTimeMillis())));
-                        user.setTime(map);
-                        RedisUtils.saveValue("punishUser:" + user.getId(), user, 90, TimeUnit.DAYS);
-                        data.put("mages", "该用户失约次数达到了3次");
-                        for(Reservationinformation reservationinformation : list1){
-                            reservationinformation.setpState(3);
-                            this.reservationinformationMapper.update(reservationinformation, null);
-                        }
-                        return data;
-                    }
-                }
             }
         }
         return null;
@@ -436,7 +456,7 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
     // 修改预约信息
     public Map<String, Object> changeInfo(Integer id, String time_re, Integer center_id, Integer first_id, String window){
         Map<String, Object> data = new HashMap<>();
-        Reservationinformation reservationinformation = this.reservationinformationMapper.selectById(id);
+        Reservationinformation reservationinformation = this.baseMapper.selectById(id);
         if(reservationinformation != null && reservationinformation.getNum() != 1){
             // 增加之前预约时段的号球数
             UpdateWrapper<Numberball> updateWrapper = new UpdateWrapper<>();
@@ -452,7 +472,7 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
             reservationinformation.setFirstId(first_id);
             reservationinformation.setWindow(window);
             reservationinformation.setNum(1);
-            int x = this.reservationinformationMapper.updateById(reservationinformation);
+            int x = this.baseMapper.updateById(reservationinformation);
 
             // 减少修改后的预约时段的号球数
             UpdateWrapper<Numberball> updateWrapper1 = new UpdateWrapper<>();

@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 管理员二级业务管理接口
  * @author bc
  * @since 2023-05-15
  */
@@ -25,7 +22,10 @@ public class SecondarybusinessController {
     @Autowired
     ISecondarybusinessService secondarybusinessService;
 
-    // 查询所有二级业务
+    /**
+     * 查询所有二级业务
+     * @return
+     */
     @GetMapping("/selectAll")
     public Result selectAll(){
         Map<String, Object> data = secondarybusinessService.selectAll();

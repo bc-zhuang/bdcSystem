@@ -2,17 +2,18 @@ package com.bdc.userService.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bdc.userService.entity.User;
 import com.bdc.userService.entity.Userinformation;
 import com.bdc.userService.mapper.UserinformationMapper;
 import com.bdc.userService.service.IUserinformationService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bdc.userService.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,6 +81,17 @@ public class UserinformationServiceImpl extends ServiceImpl<UserinformationMappe
                 data.put("fail", "实名信息已存在，请勿重复实名");
                 return data;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> selectAll() {
+        Map<String, Object> data = new HashMap<>();
+        List<Userinformation> list = this.baseMapper.selectList(null);
+        if(list != null){
+            data.put("list", list);
+            return data;
         }
         return null;
     }

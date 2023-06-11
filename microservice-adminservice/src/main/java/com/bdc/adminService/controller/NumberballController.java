@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 管理员号球数量管理接口
  * @author bc
  * @since 2023-05-15
  */
@@ -25,6 +22,10 @@ public class NumberballController {
     @Autowired
     INumberballService numberballService;
 
+    /**
+     * 查询所有号球数量
+     * @return
+     */
     @GetMapping("/selectAll")
     public Result selectAll(){
         Map<String, Object> data = numberballService.selectAllFirst();

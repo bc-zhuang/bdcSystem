@@ -7,7 +7,7 @@ public enum ResultCode {
     /* 默认成功状态码 */
     SUCCESS(1, "操作成功"),
     /* 默认失败状态码 */
-    ERROR(2, "操作失败，未知指定错误信息"),
+    ERROR(0, "操作失败，未知指定错误信息"),
     /* 参数错误：10001-19999 */
     PARAM_IS_INVALID(10001, "参数无效"),
     PARAM_IS_BLANK(10002, "参数为空"),

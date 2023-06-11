@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 管理员一级业务管理接口
  * @author bc
  * @since 2023-05-15
  */
@@ -23,7 +20,10 @@ public class FirstbusinessController {
     @Autowired
     IFirstbusinessService firstbusinessService;
 
-    // 查询所有一级业务
+    /**
+     * 查询所有一级业务
+     * @return
+     */
     @GetMapping("/selectAllFirst")
     public Result selectAllFirst(){
         Map<String, Object> data = firstbusinessService.selectAllFirst();
@@ -33,7 +33,11 @@ public class FirstbusinessController {
         return Result.failure(ResultCode.DATA_NONE);
     }
 
-    // 添加新的一级业务
+    /**
+     * 添加新的一级业务
+     * @param name
+     * @return
+     */
     @PostMapping("/addFirst")
     public Result addFirst(@RequestParam String name){
         Map<String, Object> data = firstbusinessService.addFirst(name);

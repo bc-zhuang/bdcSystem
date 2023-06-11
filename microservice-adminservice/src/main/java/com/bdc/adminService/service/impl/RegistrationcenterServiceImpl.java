@@ -1,5 +1,6 @@
 package com.bdc.adminService.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.bdc.adminService.entity.Registrationcenter;
 import com.bdc.adminService.mapper.RegistrationcenterMapper;
 import com.bdc.adminService.service.IRegistrationcenterService;
@@ -28,5 +29,22 @@ public class RegistrationcenterServiceImpl extends ServiceImpl<Registrationcente
         List<Registrationcenter> list = this.baseMapper.selectList(null);
         data.put("list", list);
         return data;
+    }
+
+    @Override
+    public Map<String, Object> change(Integer id, String name, String address, String phone) {
+        Map<String, Object> data = new HashMap<>();
+        Registrationcenter registrationcenter = this.baseMapper.selectById(id);
+        if(registrationcenter != null){
+            UpdateWrapper<Registrationcenter> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.lambda().eq(Registrationcenter::getId, registrationcenter.getId());
+            updateWrapper.lambda().set(Registrationcenter::getName, name);
+            updateWrapper.lambda().set(Registrationcenter::getAddress, address);
+            updateWrapper.lambda().set(Registrationcenter::getPhone, phone);
+            int i = this.baseMapper.update(null, updateWrapper);
+            data.put("mages", i);
+            return data;
+        }
+        return null;
     }
 }

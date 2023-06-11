@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 用户接口
  * @author bc
  * @since 2023-05-13
  */
@@ -23,7 +20,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    // 登录
+    /**
+     * 用户登录
+     * @param userName
+     * @param passWord
+     * @return
+     */
     @PostMapping("/login")
     public Result login(@RequestParam(name = "userName") String userName,
                                              @RequestParam(name = "passWord") String passWord) {
@@ -39,7 +41,12 @@ public class UserController {
         }
     }
 
-    // 注册
+    /**
+     * 用户注册
+     * @param userName
+     * @param passWord
+     * @return
+     */
     @PostMapping("/register")
     public Result register(@RequestParam(name = "userName") String userName,
                                                 @RequestParam(name = "passWord") String passWord) {
@@ -50,7 +57,13 @@ public class UserController {
         return Result.failure(20002, "账号已注册");
     }
 
-    // 修改密码
+    /**
+     * 用户修改密码
+     * @param request
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     @PostMapping("/changePassword")
     public Result changePassword(HttpServletRequest request,
                                  @RequestParam(name = "oldPassword") String oldPassword,
@@ -68,6 +81,10 @@ public class UserController {
         return Result.failure(20002, "原密码错误");
     }
 
+    /**
+     * 查询所有用户
+     * @return
+     */
     @GetMapping("/selectAllUser")
     public Result selectAllUser(){
         Map<String, Object> data = userService.selectAllUser();

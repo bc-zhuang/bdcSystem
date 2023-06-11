@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 预约信息管理
  * @author bc
  * @since 2023-05-16
  */
@@ -27,7 +24,14 @@ public class ReservationinformationController {
     @Autowired
     IReservationinformationService reservationinformationService;
 
-    // 添加预约信息
+    /** 添加预约信息
+     * @param request
+     * @param time_re
+     * @param center_id
+     * @param first_id
+     * @param window
+     * @return
+     */
     @PostMapping("/addInfo")
     public Result addInfo(HttpServletRequest request,
                           @RequestParam String time_re,
@@ -48,7 +52,10 @@ public class ReservationinformationController {
         }
     }
 
-    // 根据预约信息中的id取消预约，距离预约时段小于2个小时无法取消
+    /** 根据预约信息中的id取消预约，距离预约时段小于2个小时无法取消
+     * @param id
+     * @return
+     */
     @PostMapping("/cancelReservation")
     public Result cancelReservation(@RequestParam String id){
         Map<String, Object> data = reservationinformationService.cancelReservation(id);
@@ -58,7 +65,14 @@ public class ReservationinformationController {
         return Result.failure(ResultCode.ERROR);
     }
 
-    // 修改预约信息
+    /** 修改预约信息
+     * @param id
+     * @param time_re
+     * @param center_id
+     * @param first_id
+     * @param window
+     * @return
+     */
     @PostMapping("/changeInfo")
     public Result changeInfo(@RequestParam Integer id,
                                           @RequestParam String time_re,
@@ -72,7 +86,10 @@ public class ReservationinformationController {
         return Result.failure(ResultCode.ERROR);
     }
 
-    // 根据用户id查询用户所有的预约信息
+    /** 根据用户id查询用户所有的预约信息
+     * @param request
+     * @return
+     */
     @PostMapping("/selectAll")
     public Result selectAll(HttpServletRequest request){
         Map<String, Object> data = reservationinformationService.selectAll(request);

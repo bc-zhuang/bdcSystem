@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 管理员用户管理接口
  * @author bc
  * @since 2023-05-15
  */
@@ -24,7 +21,9 @@ public class AdminController {
     @Autowired
     IAdminService adminService;
 
-    // 管理员登录
+    /**
+     * 管理员登录
+     */
     @PostMapping("/login")
     public Result login(@RequestParam(value = "userName") String userName, @RequestParam(value = "passWord")String passWord){
         Map<String, Object> data = adminService.login(userName, passWord);
@@ -34,7 +33,9 @@ public class AdminController {
         return Result.failure(ResultCode.ERROR);
     }
 
-    // 查询所有用户信息
+    /**
+     * 查询所有用户信息
+     */
     @GetMapping("/selectAllUser")
     public JSONObject selectAllUser(){
         String str = adminService.selectAllUser();
@@ -47,8 +48,10 @@ public class AdminController {
         return JSONObject.parseObject("{\"code\":2,\"msg\":\"操作失败\"");
     }
 
-    // 根据用户号查询用户
-    @GetMapping("/selectByPhone")
+    /**
+     * 根据用户号查询用户
+     */
+    @PostMapping("/selectByPhone")
     public Result selectByPhone(@RequestParam String phone){
         Map<String, Object> data = adminService.selectByPhone(phone);
         if(data != null){

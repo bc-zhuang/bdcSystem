@@ -1,6 +1,7 @@
 package com.bdc.userService.controller;
 
 import com.bdc.userService.commom.vo.Result;
+import com.bdc.userService.commom.vo.ResultCode;
 import com.bdc.userService.service.IUserinformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 用户实名信息接口
  * @author bc
  * @since 2023-05-13
  */
@@ -21,7 +19,12 @@ import java.util.Map;
 public class UserinformationController {
     @Autowired
     IUserinformationService userinformationService;
-    // 查询用户实名信息
+
+    /**
+     * 查询用户实名信息
+     * @param request
+     * @return
+     */
     @GetMapping("/selectUserInfo")
     public Result selectUserInfo(HttpServletRequest request){
         Map<String, Object> data = userinformationService.selectUserInfo(request);
@@ -34,7 +37,13 @@ public class UserinformationController {
         return Result.failure(20005, "查询出错");
     }
 
-    // 用户添加实名信息
+    /**
+     * 用户添加实名信息
+     * @param request
+     * @param name
+     * @param idNo
+     * @return
+     */
     @PostMapping("/addInfo")
     public Result addInfo(HttpServletRequest request, @RequestParam String name, @RequestParam String idNo){
         Map<String, Object> data = userinformationService.addInfo(request, name, idNo);
@@ -45,6 +54,19 @@ public class UserinformationController {
             return Result.success(data);
         }
         return Result.failure(20005, "实名认证出错");
+    }
+
+    /**
+     * 查询所有用户实名信息
+     * @return
+     */
+    @GetMapping("/selectAll")
+    public Result selectAll(){
+        Map<String, Object> data = userinformationService.selectAll();
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
     }
 
 }

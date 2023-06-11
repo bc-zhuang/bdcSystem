@@ -13,7 +13,7 @@ public class Test {
         String basePackage = "com.bdc";
         String moduleName = "adminService";
         String mapperLocation = "C:\\Users\\1\\Desktop\\软件设计与开发\\microservice_bdcSystem\\microservice-adminservice\\src\\main\\resources\\mapper\\" + moduleName;
-        String tableName = "x_user,x_registrationCenter,x_numberBall,x_firstBusiness,x_secondaryBusiness,x_thirdBusiness,x_timeInterval";
+        String tableName = "x_user,x_registrationCenter,x_numberBall,x_firstBusiness,x_secondaryBusiness,x_thirdBusiness,x_timeInterval, x_userInformation";
         String tablePrefix = "x_";
 
         FastAutoGenerator.create(url, username, password)
