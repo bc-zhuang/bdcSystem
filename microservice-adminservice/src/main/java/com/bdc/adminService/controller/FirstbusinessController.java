@@ -47,4 +47,20 @@ public class FirstbusinessController {
         return Result.failure(ResultCode.ERROR);
     }
 
+    /**
+     * 修改一级业务信息
+     * @param id
+     * @param name
+     * @return
+     */
+    @PostMapping("/change")
+    public Result change(@RequestParam Integer id,
+                         @RequestParam String name){
+        Map<String, Object> data = firstbusinessService.change(id, name);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.bdc.adminService.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bdc.adminService.entity.Admin;
 import com.bdc.adminService.mapper.AdminMapper;
@@ -58,14 +59,33 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return this.restTemplate.getForObject("http://user-service/user/selectAllUser", String.class);
     }
 
+    // 根据手机号查询用户
     @Override
     public Map<String, Object> selectByPhone(String phone) {
         Map<String, Object> data = new HashMap<>();
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(Admin::getPhone, phone);
         Admin admin = this.baseMapper.selectOne(queryWrapper);
-        data.put("user", admin);
-        return data;
+        if(admin != null){
+            data.put("user", admin);
+            return data;
+        }
+        return null;
+    }
+
+    // 删除用户
+    @Override
+    public Map<String, Object> delete(Integer id) {
+        Map<String, Object> data = new HashMap<>();
+        UpdateWrapper<Admin> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.lambda().eq(Admin::getId, id);
+        updateWrapper.lambda().set(Admin::getState, 1);
+        int i = this.baseMapper.update(null, updateWrapper);
+        if(i == 1){
+            data.put("mages", i);
+            return data;
+        }
+        return null;
     }
 
 

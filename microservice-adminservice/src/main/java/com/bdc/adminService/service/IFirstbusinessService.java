@@ -18,4 +18,6 @@ public interface IFirstbusinessService extends IService<Firstbusiness> {
     Map<String, Object> selectAllFirst();
 
     Map<String, Object> addFirst(String name);
+
+    Map<String, Object> change(Integer id, String name);
 }

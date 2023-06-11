@@ -20,4 +20,6 @@ public interface IAdminService extends IService<Admin> {
     String selectAllUser();
 
     Map<String, Object> selectByPhone(String phone);
+
+    Map<String, Object> delete(Integer id);
 }

@@ -41,6 +41,7 @@ ignored:
     - /user/login
     - /user/register
     - /user/selectAllUser
+    - /userinformation/selectAll
 
 
 jwt:

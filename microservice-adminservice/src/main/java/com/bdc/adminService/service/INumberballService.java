@@ -16,4 +16,8 @@ import java.util.Map;
 public interface INumberballService extends IService<Numberball> {
 
     Map<String, Object> selectAllFirst();
+
+    Map<String, Object> selectByCenterId(Integer id);
+
+    Map<String, Object> changeNumberById(Integer id, Integer number);
 }

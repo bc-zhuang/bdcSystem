@@ -49,11 +49,25 @@ public class AdminController {
     }
 
     /**
-     * 根据用户号查询用户
+     * 根据用户手机号查询用户
      */
     @PostMapping("/selectByPhone")
     public Result selectByPhone(@RequestParam String phone){
         Map<String, Object> data = adminService.selectByPhone(phone);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @PostMapping("/delete")
+    public Result delete(@RequestParam Integer id){
+        Map<String, Object> data = adminService.delete(id);
         if(data != null){
             return Result.success(data);
         }

@@ -69,6 +69,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.lambda().eq(User::getPhone, userName);
         queryWrapper.lambda().eq(User::getPaswd, passWord);
+        queryWrapper.lambda().eq(User::getState, 0);
         user = this.baseMapper.selectOne(queryWrapper);
         if (user != null){ //一个简单的登录逻辑
             User jwtUser = JwtUtils.setTime(user);

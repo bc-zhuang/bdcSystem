@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ApifoxUploaderProjectSetting">
+    <option name="apifoxAccessToken" value="APS-XuoPgfLv3ZedWw82I7e731ojykVzNlrb" />
+    <option name="apifoxApiOverwriteMode" value="覆盖所有字段" />
+    <option name="apifoxProjectIds">
+      <array>
+        <option value="# ModuleName:ProjectID" />
+        <option value="microservice-adminservice:2861943" />
+        <option value="microservice-userservice:2861943" />
+        <option value="microservice-reservationservice:2861943" />
+      </array>
+    </option>
+    <option name="yapiTokens" value="" />
+  </component>
+</project>

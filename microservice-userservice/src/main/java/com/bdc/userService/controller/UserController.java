@@ -54,7 +54,7 @@ public class UserController {
         if (data != null) {
             return Result.success(data);
         }
-        return Result.failure(20002, "账号已注册");
+        return Result.failure(2, "账号已注册");
     }
 
     /**
@@ -73,12 +73,12 @@ public class UserController {
             return Result.failure(20005, (String) data.get("fail"));
         }
         if(data != null && data.get("fail1") != null){
-            return Result.failure(20002, (String) data.get("fail1"));
+            return Result.failure(2, (String) data.get("fail1"));
         }
         if (data != null) {
             return Result.success(data);
         }
-        return Result.failure(20002, "原密码错误");
+        return Result.failure(2, "原密码错误");
     }
 
     /**

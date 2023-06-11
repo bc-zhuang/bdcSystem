@@ -1,6 +1,7 @@
 package com.bdc.adminService.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bdc.adminService.entity.Firstbusiness;
 import com.bdc.adminService.mapper.FirstbusinessMapper;
@@ -50,6 +51,25 @@ public class FirstbusinessServiceImpl extends ServiceImpl<FirstbusinessMapper, F
         return null;
     }
 
+    /**
+     * 更改一级业务信息
+     * @param id
+     * @param name
+     * @return
+     */
+    @Override
+    public Map<String, Object> change(Integer id, String name) {
+        Map<String, Object> data = new HashMap<>();
+        UpdateWrapper<Firstbusiness> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.lambda().eq(Firstbusiness::getId, id);
+        updateWrapper.lambda().set(Firstbusiness::getName, name);
+        int i = this.baseMapper.update(null, updateWrapper);
+        if(i == 1){
+            data.put("mages", i);
+            return data;
+        }
+        return null;
+    }
 
 
 }
