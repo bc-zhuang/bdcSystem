@@ -30,6 +30,7 @@ ignored:
     - /**/*.png
     - /**/*.ico
     - /admin/login
+    - /adminService/numberball/selectByCenterId
 
 
 jwt:

@@ -490,4 +490,31 @@ public class  ReservationinformationServiceImpl extends ServiceImpl<Reservationi
         }
         return null;
     }
+
+    /**
+     * 查询所有预约信息
+     */
+    @Override
+    public Map<String, Object> selectALL() {
+        Map<String, Object> data = new HashMap<>();
+        List<Reservationinformation> list = this.baseMapper.selectList(null);
+        if(list != null){
+            data.put("list", list);
+            return data;
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> selectByFirst(Integer firstId) {
+        Map<String, Object> data = new HashMap<>();
+        QueryWrapper<Reservationinformation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Reservationinformation::getFirstId, firstId);
+        List<Reservationinformation> list = this.baseMapper.selectList(queryWrapper);
+        if(list != null){
+            data.put("list", list);
+            return data;
+        }
+        return null;
+    }
 }

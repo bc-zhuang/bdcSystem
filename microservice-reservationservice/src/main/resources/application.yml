@@ -38,6 +38,8 @@ ignored:
     - /**/*.css
     - /**/*.png
     - /**/*.ico
+    - /reservationService/reservationinformation/selectALL
+    - /reservationService/reservationinformation/selectByFirst
 
 
 jwt:

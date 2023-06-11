@@ -42,4 +42,7 @@ public interface IReservationinformationService extends IService<Reservationinfo
     // 修改预约信息
     Map<String, Object> changeInfo(Integer id, String time_re, Integer center_id, Integer first_id, String window);
 
+    Map<String, Object> selectALL();
+
+    Map<String, Object> selectByFirst(Integer firstId);
 }

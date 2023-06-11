@@ -4,10 +4,7 @@ import com.bdc.reservationService.common.vo.Result;
 import com.bdc.reservationService.common.vo.ResultCode;
 import com.bdc.reservationService.service.IReservationinformationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -93,6 +90,30 @@ public class ReservationinformationController {
     @PostMapping("/selectAll")
     public Result selectAll(HttpServletRequest request){
         Map<String, Object> data = reservationinformationService.selectAll(request);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
+    /**
+     * 查询所有预约信息
+     */
+    @GetMapping("/selectALL")
+    public Result selectALL(){
+        Map<String, Object> data = reservationinformationService.selectALL();
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
+    /**
+     * 根据一级业务查询预约信息
+     */
+    @PostMapping("/selectByFirst")
+    public Result selectByFirst(@RequestParam Integer first_id){
+        Map<String, Object> data = reservationinformationService.selectByFirst(first_id);
         if(data != null){
             return Result.success(data);
         }

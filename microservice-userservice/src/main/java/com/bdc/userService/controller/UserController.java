@@ -22,9 +22,6 @@ public class UserController {
 
     /**
      * 用户登录
-     * @param userName
-     * @param passWord
-     * @return
      */
     @PostMapping("/login")
     public Result login(@RequestParam(name = "userName") String userName,
