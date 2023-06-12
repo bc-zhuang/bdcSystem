@@ -22,4 +22,8 @@ public interface IAdminService extends IService<Admin> {
     Map<String, Object> selectByPhone(String phone);
 
     Map<String, Object> delete(Integer id);
+
+    Map<String, Object> changePower(Integer id, Integer power);
+
+    Map<String, Object> changeUser(Integer id, String phone, String paswd, Integer state, Integer power);
 }

@@ -47,4 +47,20 @@ public class RegistrationcenterServiceImpl extends ServiceImpl<Registrationcente
         }
         return null;
     }
+
+    // 添加不动产中心
+    @Override
+    public Map<String, Object> addCneter(String name, String address, String phone) {
+        Map<String, Object> data = new HashMap<>();
+        Registrationcenter registrationcenter = new Registrationcenter();
+        registrationcenter.setName(name);
+        registrationcenter.setAddress(address);
+        registrationcenter.setPhone(phone);
+        int i = this.baseMapper.insert(registrationcenter);
+        if(i == 1){
+            data.put("mages", i);
+            return data;
+        }
+        return null;
+    }
 }

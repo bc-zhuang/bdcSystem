@@ -62,12 +62,49 @@ public class AdminController {
 
     /**
      * 删除用户
-     * @param id
+     * @param id 用户id
      * @return
      */
     @PostMapping("/delete")
     public Result delete(@RequestParam Integer id){
         Map<String, Object> data = adminService.delete(id);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
+    /**
+     * 根据用户id修改用户权限，0表示普通用户，1表示管理员
+     * @param id 用户id
+     * @param power 用户权限
+     * @return
+     */
+    @PostMapping("/changePower")
+    public Result changePower(@RequestParam Integer id, @RequestParam Integer power){
+        Map<String, Object> data = adminService.changePower(id, power);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
+    /**
+     * 根据用户id修改用户的全部信息
+     * @param id 用户id
+     * @param phone 用户账号
+     * @param paswd 密码
+     * @param state 状态
+     * @param power 权限
+     * @return
+     */
+    @PostMapping("/changeUser")
+    public  Result changeUser(@RequestParam Integer id,
+                              @RequestParam String phone,
+                              @RequestParam String paswd,
+                              @RequestParam Integer state,
+                              @RequestParam Integer power){
+        Map<String, Object> data = adminService.changeUser(id, phone, paswd, state, power);
         if(data != null){
             return Result.success(data);
         }

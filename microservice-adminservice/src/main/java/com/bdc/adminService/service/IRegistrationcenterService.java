@@ -18,4 +18,6 @@ public interface IRegistrationcenterService extends IService<Registrationcenter>
     Map<String, Object> selectAll();
 
     Map<String, Object> change(Integer id, String name, String address, String phone);
+
+    Map<String, Object> addCneter(String name, String address, String phone);
 }

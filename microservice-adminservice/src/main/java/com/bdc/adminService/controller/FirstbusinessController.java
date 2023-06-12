@@ -35,7 +35,7 @@ public class FirstbusinessController {
 
     /**
      * 添加新的一级业务
-     * @param name
+     * @param name 业务名称
      * @return
      */
     @PostMapping("/addFirst")
@@ -49,8 +49,8 @@ public class FirstbusinessController {
 
     /**
      * 修改一级业务信息
-     * @param id
-     * @param name
+     * @param id 一级业务id
+     * @param name 业务名称
      * @return
      */
     @PostMapping("/change")
@@ -62,5 +62,7 @@ public class FirstbusinessController {
         }
         return Result.failure(ResultCode.ERROR);
     }
+
+
 
 }

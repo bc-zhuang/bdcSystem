@@ -34,10 +34,10 @@ public class RegistrationcenterController {
 
     /**
      * 更改不动产登记中心的信息
-     * @param id
-     * @param name
-     * @param address
-     * @param phone
+     * @param id 不动产中心id
+     * @param name 名称
+     * @param address 地址
+     * @param phone 电话
      * @return
      */
     @PostMapping("/change")
@@ -46,6 +46,24 @@ public class RegistrationcenterController {
                          @RequestParam String address,
                          @RequestParam String phone){
         Map<String, Object> data = registrationcenterService.change(id, name, address, phone);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.DATA_NONE);
+    }
+
+    /**
+     * 添加新的不动产登记中心
+     * @param name 名称
+     * @param address 地址
+     * @param phone 电话
+     * @return
+     */
+    @PostMapping("/addCenter")
+    public Result addCenter(@RequestParam String name,
+                            @RequestParam String address,
+                            @RequestParam String phone){
+        Map<String, Object> data = registrationcenterService.addCneter(name, address, phone);
         if(data != null){
             return Result.success(data);
         }

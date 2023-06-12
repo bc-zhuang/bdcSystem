@@ -88,5 +88,41 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return null;
     }
 
+    // 根据用户id更改用户权限
+    @Override
+    public Map<String, Object> changePower(Integer id, Integer power) {
+        Map<String, Object> data = new HashMap<>();
+        Admin admin = this.baseMapper.selectById(id);
+        if(admin != null){
+            UpdateWrapper<Admin> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.lambda().eq(Admin::getId, admin.getId());
+            updateWrapper.lambda().set(Admin::getPaswd, power);
+            int i = this.baseMapper.update(null, updateWrapper);
+            if(i == 1){
+                data.put("mages", i);
+                return data;
+            }
+        }
+        return null;
+    }
+
+    // 根据用户id修改用户全部信息
+    @Override
+    public Map<String, Object> changeUser(Integer id, String phone, String paswd, Integer state, Integer power) {
+        Map<String, Object> data = new HashMap<>();
+        UpdateWrapper<Admin> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.lambda().eq(Admin::getId, id);
+        updateWrapper.lambda().set(Admin::getPhone, phone);
+        updateWrapper.lambda().set(Admin::getPaswd, paswd);
+        updateWrapper.lambda().set(Admin::getState, state);
+        updateWrapper.lambda().set(Admin::getPower, power);
+        int i = this.baseMapper.update(null, updateWrapper);
+        if(i == 1){
+            data.put("mages", i);
+            return data;
+        }
+        return null;
+    }
+
 
 }

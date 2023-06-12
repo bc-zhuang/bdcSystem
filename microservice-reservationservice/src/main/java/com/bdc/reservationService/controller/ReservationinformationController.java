@@ -23,10 +23,10 @@ public class ReservationinformationController {
 
     /** 添加预约信息
      * @param request
-     * @param time_re
-     * @param center_id
-     * @param first_id
-     * @param window
+     * @param time_re 预约的时段
+     * @param center_id 不动产登记中心的id
+     * @param first_id 一级业务id
+     * @param window 窗口号
      * @return
      */
     @PostMapping("/addInfo")
@@ -50,7 +50,7 @@ public class ReservationinformationController {
     }
 
     /** 根据预约信息中的id取消预约，距离预约时段小于2个小时无法取消
-     * @param id
+     * @param id 该预约信息的id
      * @return
      */
     @PostMapping("/cancelReservation")
@@ -63,11 +63,11 @@ public class ReservationinformationController {
     }
 
     /** 修改预约信息
-     * @param id
-     * @param time_re
-     * @param center_id
-     * @param first_id
-     * @param window
+     * @param id 该预约的id号
+     * @param time_re 预约时段
+     * @param center_id 不动产登记中心id
+     * @param first_id 一级业务id
+     * @param window 窗口号
      * @return
      */
     @PostMapping("/changeInfo")
@@ -84,7 +84,6 @@ public class ReservationinformationController {
     }
 
     /** 根据用户id查询用户所有的预约信息
-     * @param request
      * @return
      */
     @PostMapping("/selectAll")
@@ -109,7 +108,7 @@ public class ReservationinformationController {
     }
 
     /**
-     * 根据一级业务查询预约信息
+     * 根据一级业务id查询预约信息
      */
     @PostMapping("/selectByFirst")
     public Result selectByFirst(@RequestParam Integer first_id){
