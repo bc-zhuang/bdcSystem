@@ -2,6 +2,7 @@ package com.bdc.userService.service.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bdc.userService.entity.User;
 import com.bdc.userService.entity.Userinformation;
@@ -91,6 +92,20 @@ public class UserinformationServiceImpl extends ServiceImpl<UserinformationMappe
         List<Userinformation> list = this.baseMapper.selectList(null);
         if(list != null){
             data.put("list", list);
+            return data;
+        }
+        return null;
+    }
+
+    // 根据用户id查询用户实名信息
+    @Override
+    public Map<String, Object> selectById(Integer id) {
+        Map<String, Object> data = new HashMap<>();
+        QueryWrapper<Userinformation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Userinformation::getUserId, id);
+        Userinformation userinformation = this.baseMapper.selectOne(queryWrapper);
+        if(userinformation != null){
+            data.put("userInformation", userinformation);
             return data;
         }
         return null;

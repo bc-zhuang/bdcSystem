@@ -21,4 +21,6 @@ public interface IUserinformationService extends IService<Userinformation> {
     Map<String, Object> addInfo(HttpServletRequest request, String name, String idNo);
 
     Map<String, Object> selectAll();
+
+    Map<String, Object> selectById(Integer id);
 }

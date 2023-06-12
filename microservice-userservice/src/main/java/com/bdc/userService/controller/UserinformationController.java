@@ -69,4 +69,18 @@ public class UserinformationController {
         return Result.failure(ResultCode.ERROR);
     }
 
+    /**
+     * 根据用户id查询用户信息
+     * @param id 用户id
+     * @return
+     */
+    @GetMapping("/selectById")
+    public Result selectById(@RequestParam Integer id){
+        Map<String, Object> data = userinformationService.selectById(id);
+        if(data != null){
+            return Result.success(data);
+        }
+        return Result.failure(ResultCode.ERROR);
+    }
+
 }
